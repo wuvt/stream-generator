@@ -1,0 +1,16 @@
+[Unit]
+Description=Stream Generator
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/docker run --rm \
+	--device=/dev/snd:/dev/snd \
+	--env-file=/etc/default/stream-generator \
+	--name stream-generator \
+	ghcr.io/wuvt/stream-generator:latest
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
