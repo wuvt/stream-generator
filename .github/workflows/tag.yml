@@ -1,0 +1,19 @@
+name: Build and push container image with version tag
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build and push Docker image to GitHub Package Registry
+      uses: elgohr/Publish-Docker-Github-Action@v5
+      with:
+        name: wuvt/stream-generator
+        username: wuvt
+        password: ${{ secrets.GITHUB_TOKEN }}
+        registry: ghcr.io
+        tag_names: true
