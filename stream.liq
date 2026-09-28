@@ -1,6 +1,6 @@
 %include "config.liq"
 
-live = input.alsa(device=alsa_input)
+live = input.alsa(device=alsa_input, buffer_size=8)
 
 output.icecast(
     %vorbis.cbr(samplerate=44100, channels=2, bitrate=128),
